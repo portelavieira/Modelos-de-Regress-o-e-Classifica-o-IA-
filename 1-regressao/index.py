@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 
 # Carregar os dados
 data = np.loadtxt('1-regressao/aerogerador.dat')
@@ -87,8 +88,6 @@ estatisticas = {
 for lambd in lambdas:
     estatisticas[f'MQO Regularizado ({lambd})'] = calcular_estatisticas(rss_regularizado[lambd])
 
-# Exibir as estatísticas em uma tabela
-import pandas as pd
 
 df_estatisticas = pd.DataFrame(estatisticas).T
 print(df_estatisticas)
