@@ -59,7 +59,5 @@ for _ in range(R):
     
     results.append(accuracy)
 
-print(np.mean(results))
-print(np.std(results))
-print(np.max(results))
-print(np.min(results))
+print(f"{'Média':<15} {'Desvio-Padrão':<20} {'Maior Valor':<15} {'Menor Valor':<15}")
+print(f"{np.mean(results):<15.6e} {np.std(results):<20.6f} {np.max(results):<15.6e} {np.min(results):<15.6e}")

@@ -65,13 +65,13 @@ for _ in range(R):
     
     for i in range(5):
         medias.append(np.mean(grupos_x[i], axis=1).reshape((2,1)))
-        
+    
     m_agreg = np.zeros((P,P))
     
     for i in range(5):
         ni = grupos_x[i].shape[1]
         m_agreg += ni/(N*percent)*matrizes_vari[i]
-        
+    
     m_cov_fried = []
     for i in range(5):
         ni = grupos_x[i].shape[1]
@@ -80,14 +80,14 @@ for _ in range(R):
         divisor = (1 - lamb)*ni+(lamb*n)
         
         m_cov_fried.append(dividendo/divisor)
-        
+    
     grupos_determ = []
     grupos_inver = []
     
     for i in range(5):
         grupos_determ.append(np.linalg.det(m_cov_fried[i]))
         grupos_inver.append(np.linalg.inv(m_cov_fried[i]))
-        
+    
     y_pred = []
     for i in range(x_teste.shape[1]):
         x_novo = x_teste[:,i].reshape((2,1))
@@ -97,16 +97,13 @@ for _ in range(R):
             predict.append(gi(x_novo, medias[j], grupos_determ[j], grupos_inver[j]))
         
         y_pred.append(np.argmax(predict))
-    
+
     y_pred=np.array(y_pred)
     y_teste = y_teste[0]
-    
-    
+
     accuracy = np.mean(y_pred == y_teste)
-    
+
     results.append(accuracy)
 
-print(np.mean(results))
-print(np.std(results))
-print(np.max(results))
-print(np.min(results))
+print(f"{'Média':<15} {'Desvio-Padrão':<20} {'Maior Valor':<15} {'Menor Valor':<15}")
+print(f"{np.mean(results):<15.6e} {np.std(results):<20.6f} {np.max(results):<15.6e} {np.min(results):<15.6e}")
