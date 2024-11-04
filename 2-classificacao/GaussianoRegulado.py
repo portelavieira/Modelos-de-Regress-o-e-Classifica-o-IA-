@@ -25,7 +25,7 @@ R = 500
 
 percent = 0.8
 
-lamb = 0.000000000001
+lamb = 0
 
 treno = int(percent*N)
 
@@ -86,7 +86,7 @@ for _ in range(R):
     
     for i in range(5):
         grupos_determ.append(np.linalg.det(m_cov_fried[i]))
-        grupos_inver.append(np.linalg.inv(m_cov_fried[i]))
+        grupos_inver.append(np.linalg.pinv(m_cov_fried[i]))
     
     y_pred = []
     for i in range(x_teste.shape[1]):
@@ -106,4 +106,4 @@ for _ in range(R):
     results.append(accuracy)
 
 print(f"{'Média':<15} {'Desvio-Padrão':<20} {'Maior Valor':<15} {'Menor Valor':<15}")
-print(f"{np.mean(results):<15.6e} {np.std(results):<20.6f} {np.max(results):<15.6e} {np.min(results):<15.6e}")
+print(np.mean(results), np.std(results), np.max(results), np.min(results))
